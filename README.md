@@ -26,15 +26,15 @@ python3 vlm_infer.py \
 For Orin:
 
 ```bash
-bin/build-orin-1.6b.sh
-bin/build-orin-3b.sh
+uv run build-orin-1p6b
+uv run build-orin-3b
 ```
 
 For GH200:
 
 ```bash
-bin/build-gh200-1.6b.sh
-bin/build-gh200-3b.sh
+uv run build-gh200-1p6b
+uv run build-gh200-3b
 ```
 
 ## License
