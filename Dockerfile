@@ -7,7 +7,7 @@ ARG BASE_IMAGE=dustynv/l4t-pytorch:r36.2.0
 FROM ${BASE_IMAGE}
 
 # ---- llama.cpp build settings ----
-ARG LLAMA_CPP_REF=master
+ARG LLAMA_CPP_REF=b7491
 ARG CUDA_ARCH=87
 
 # ---- model selection ----
