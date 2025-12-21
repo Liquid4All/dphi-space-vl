@@ -38,28 +38,14 @@ RUN git clone https://github.com/ggml-org/llama.cpp.git && \
     cmake --build build --config Release
 
 # Download model artifacts into the image
-# (public repos; no token required)
-RUN python3 -m pip install --no-cache-dir --upgrade pip huggingface_hub && \
-    python3 - << 'PY'
-import os
-from huggingface_hub import hf_hub_download
-
-repo = os.environ["HF_REPO"]
-text_file = os.environ["TEXT_FILE"]
-mmproj_file = os.environ["MMPROJ_FILE"]
-
-os.makedirs("/models", exist_ok=True)
-
-text_path = hf_hub_download(repo_id=repo, filename=text_file, local_dir="/models", local_dir_use_symlinks=False)
-mmproj_path = hf_hub_download(repo_id=repo, filename=mmproj_file, local_dir="/models", local_dir_use_symlinks=False)
-
-# Normalize filenames so entrypoint doesn't care which variant was baked in
-import shutil
-shutil.copyfile(text_path, "/models/model.gguf")
-shutil.copyfile(mmproj_path, "/models/mmproj.gguf")
-
-print("Downloaded:", text_path, mmproj_path)
-PY
+RUN mkdir -p /models && \
+    echo "Downloading from HF repo: ${HF_REPO}" && \
+    curl -L --fail --retry 5 --retry-delay 2 \
+      "https://huggingface.co/${HF_REPO}/resolve/main/${TEXT_FILE}" \
+      -o /models/model.gguf && \
+    curl -L --fail --retry 5 --retry-delay 2 \
+      "https://huggingface.co/${HF_REPO}/resolve/main/${MMPROJ_FILE}" \
+      -o /models/mmproj.gguf
 
 WORKDIR /app
 COPY entrypoint.sh /app/entrypoint.sh
