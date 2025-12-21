@@ -10,5 +10,8 @@ build-orin-3b = "dphi_build.cli:build_orin_3b"
 build-gh200-1p6b = "dphi_build.cli:build_gh200_1p6b"
 build-gh200-3b = "dphi_build.cli:build_gh200_3b"
 
+[tool.setuptools]
+packages = ["dphi_build"]
+
 [tool.uv]
 package = true
