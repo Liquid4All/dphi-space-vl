@@ -35,6 +35,30 @@ docker run --runtime nvidia --rm --network host \
   liquidai/lfm2-vl-1p6b-gguf:orin-q4-llama-cpp-r36.4.0-latest
 ```
 
+These docker environment flags are supported by the entrypoint script to configure the `llama-cpp` server:
+
+| Docker env flag | Corresponding `llama-cpp` server param | Description | Default |
+| --- | --- | --- | --- |
+| `-e HOST` | `--host` | Server host IP | `0.0.0.0` |
+| `-e PORT` | `--port` | Server port | 8080 |
+| `-e N_GPU_LAYERS` | `-ngl` | Max number of layers to store in VRAM | 999 |
+| `-e N_PARALLEL` | `-np` | Number of parallel requests | 1 |
+| `-e CTX_SIZE` | `-c` | Context size in tokens | 4096 |
+| `-e BATCH_SIZE` | `-b` | Logical maximum batch size | 512 |
+| `-e UBATCH_SIZE` | `-ub` | Physical maximum batch size | 128 |
+
+Reference: [link](https://github.com/ggml-org/llama.cpp/tree/master/tools/server#common-params)
+
+Example:
+
+```bash
+docker run --runtime nvidia --rm --network host \
+  -e CTX_SIZE=2048 \
+  -e BATCH_SIZE=64 \
+  -e UBATCH_SIZE=32 \
+  liquidai/lfm2-vl-3b-gguf:orin-q4-l4t-pytorch-r36.4.0-latest
+```
+
 ### Run inference
 
 ```bash
