@@ -46,6 +46,7 @@ def main():
         }],
         "max_tokens": args.max_tokens,
         "temperature": args.temperature,
+        "cache_prompt": False,
     }
 
     out = post_json(args.server.rstrip("/") + "/v1/chat/completions", payload)
