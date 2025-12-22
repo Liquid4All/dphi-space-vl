@@ -6,23 +6,12 @@ This repo builds containerized Liquid visual models for DPhi Space.
 
 ### Available Images
 
-**Priority 1 - r36.4.0 builds (Recommended for JetPack 6.2.1)**
-```bash
-# 1.6B model - compiled against r36.4.0
-liquidai/lfm2-vl-1p6b-gguf:orin-q4-r36.4.0-latest
-
-# 3B model - compiled against r36.4.0
-liquidai/lfm2-vl-3b-gguf:orin-q4-r36.4.0-latest
-```
-
-**Priority 2 - dusty-nv builds (Pre-validated alternative)**
-```bash
-# 1.6B model - using dusty-nv's llama_cpp base
-liquidai/lfm2-vl-1p6b-gguf:orin-q4-dustynv-r36.4.0-latest
-
-# 3B model - using dusty-nv's llama_cpp base
-liquidai/lfm2-vl-3b-gguf:orin-q4-dustynv-r36.4.0-latest
-```
+| Model Size | Quantization | Base Version | Image Tag |
+| --- | --- | --- | --- |
+| 3B | `Q4_0` | `l4t-pytorch` `r36.4.0` | `liquidai/lfm2-vl-3b-gguf:orin-q4-l4t-pytorch-r36.4.0-latest` |
+| 3B | `Q4_0` | `llama-cpp` `r36.4.0` | `liquidai/lfm2-vl-3b-gguf:orin-q4-llama-cpp-r36.4.0-latest` |
+| 1.6B | `Q4_0` | `l4t-pytorch` `r36.4.0` | `liquidai/lfm2-vl-1p6b-gguf:orin-q4-l4t-pytorch-r36.4.0-latest` |
+| 1.6B | `Q4_0` | `llama-cpp` `r36.4.0` | `liquidai/lfm2-vl-1p6b-gguf:orin-q4-llama-cpp-r36.4.0-latest` |
 
 ### Launch the server
 
@@ -30,20 +19,20 @@ liquidai/lfm2-vl-3b-gguf:orin-q4-dustynv-r36.4.0-latest
 
 ```bash
 docker run --runtime nvidia --rm --network host \
-  liquidai/lfm2-vl-3b-gguf:orin-q4-r36.4.0-latest
+  liquidai/lfm2-vl-3b-gguf:orin-q4-l4t-pytorch-r36.4.0-latest
 
 docker run --runtime nvidia --rm --network host \
-  liquidai/lfm2-vl-3b-gguf:orin-q4-dustynv-r36.4.0-latest
+  liquidai/lfm2-vl-3b-gguf:orin-q4-llama-cpp-r36.4.0-latest
 ```
 
 **1.6B models**
 
 ```bash
 docker run --runtime nvidia --rm --network host \
-  liquidai/lfm2-vl-1p6b-gguf:orin-q4-r36.4.0-latest
+  liquidai/lfm2-vl-1p6b-gguf:orin-q4-l4t-pytorch-r36.4.0-latest
 
 docker run --runtime nvidia --rm --network host \
-  liquidai/lfm2-vl-1p6b-gguf:orin-q4-dustynv-r36.4.0-latest
+  liquidai/lfm2-vl-1p6b-gguf:orin-q4-llama-cpp-r36.4.0-latest
 ```
 
 ### Run inference
