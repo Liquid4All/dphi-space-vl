@@ -1,6 +1,33 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+# Find llama-server binary - different locations for different base images
+# l4t-pytorch builds: /usr/local/bin/llama-server
+# llama-cpp builds: /opt/llama.cpp/build/bin/llama-server or in PATH
+if [ -f /usr/local/bin/llama-server ]; then
+    LLAMA_SERVER="/usr/local/bin/llama-server"
+elif [ -f /opt/llama.cpp/build/bin/llama-server ]; then
+    LLAMA_SERVER="/opt/llama.cpp/build/bin/llama-server"
+elif [ -f /opt/llama.cpp/bin/llama-server ]; then
+    LLAMA_SERVER="/opt/llama.cpp/bin/llama-server"
+elif command -v llama-server &> /dev/null; then
+    LLAMA_SERVER="llama-server"
+else
+    echo "ERROR: llama-server binary not found!"
+    echo "Searched:"
+    echo "  - /usr/local/bin/llama-server"
+    echo "  - /opt/llama.cpp/build/bin/llama-server"
+    echo "  - /opt/llama.cpp/bin/llama-server"
+    echo "  - \$PATH (command -v llama-server)"
+    echo ""
+    echo "Checking common locations..."
+    find /usr -name "llama-server" 2>/dev/null || true
+    find /opt -name "llama-server" 2>/dev/null || true
+    exit 1
+fi
+
+echo "Found llama-server at: $LLAMA_SERVER"
+
 MODEL_PATH="${MODEL_PATH:-/models/model.gguf}"
 MMPROJ_PATH="${MMPROJ_PATH:-/models/mmproj.gguf}"
 
@@ -42,19 +69,10 @@ echo "  $(ls -lh ${MODEL_PATH})"
 echo "  $(ls -lh ${MMPROJ_PATH})"
 echo ""
 
-# Check if llama-server exists
-if [ ! -f /usr/local/bin/llama-server ]; then
-    echo "ERROR: llama-server binary not found at /usr/local/bin/llama-server"
-    exit 1
-fi
-
-echo "Binary found: $(ls -lh /usr/local/bin/llama-server)"
-echo ""
-
 echo "Starting llama-server..."
 echo ""
 
-exec /usr/local/bin/llama-server \
+exec "$LLAMA_SERVER" \
   --host "${HOST}" \
   --port "${PORT}" \
   -m "${MODEL_PATH}" \
