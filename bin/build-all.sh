@@ -8,20 +8,20 @@ echo "========================================"
 # Priority 1: r36.4.0 builds (exact match for flight hardware)
 echo ""
 echo "[1/8] Building Orin r36.4.0 - 1.6B..."
-uv run build-orin-r36.4.0-1p6b
+uv run build-orin-r36-4-0-1p6b
 
 echo ""
 echo "[2/8] Building Orin r36.4.0 - 3B..."
-uv run build-orin-r36.4.0-3b
+uv run build-orin-r36-4-0-3b
 
 # Priority 2: r36.2.0 builds (original builds for comparison)
 echo ""
 echo "[3/8] Building Orin r36.2.0 - 1.6B..."
-uv run build-orin-r36.2.0-1p6b
+uv run build-orin-r36-2-0-1p6b
 
 echo ""
 echo "[4/8] Building Orin r36.2.0 - 3B..."
-uv run build-orin-r36.2.0-3b
+uv run build-orin-r36-2-0-3b
 
 # Priority 3: dusty-nv llama_cpp builds (pre-validated alternative)
 echo ""
