@@ -18,7 +18,7 @@ Run inference:
 python3 vlm_infer.py \
   --server http://127.0.0.1:8080 \
   --image ./images/example.png \
-  --prompt "Describe what you see, especially if you see any alien spaceships."
+  --prompt "Describe what you see in the image."
 ```
 
 ## Build
