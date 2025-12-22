@@ -41,8 +41,10 @@ def main():
             {
                 "role": "user",
                 "content": [
-                    {"type": "text", "text": args.prompt},
+                    # place image before text
+                    # reference: https://github.com/ggml-org/llama.cpp/pull/17616
                     {"type": "image_url", "image_url": {"url": b64_image(args.image)}},
+                    {"type": "text", "text": args.prompt},
                 ],
             }
         ],
