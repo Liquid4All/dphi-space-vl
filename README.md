@@ -6,19 +6,23 @@ Launch the server:
 
 ```bash
 # run 3b model:
-docker run --runtime nvidia --rm --network host liquidai/lfm2-vl-3b-gguf-q4:<version>
+./bin/run-vl-3b.sh
 
 # or 1.6b model:
-docker run --runtime nvidia --rm --network host liquidai/lfm2-vl-1p6b-gguf-q4:<version>
+./bin/run-vl-1.6b.sh
 ```
 
 Run inference:
 
-```
+```bash
+# run script
+./bin/test-vl.sh
+
+# full command
 python3 vlm_infer.py \
   --server http://127.0.0.1:8080 \
   --image ./images/example.png \
-  --prompt "Describe what you see in the image."
+  --prompt "Describe what you see in the image"
 ```
 
 ## Build
