@@ -37,13 +37,15 @@ def main():
 
     payload = {
         "model": "local",
-        "messages": [{
-            "role": "user",
-            "content": [
-                {"type": "text", "text": args.prompt},
-                {"type": "image_url", "image_url": {"url": b64_image(args.image)}},
-            ],
-        }],
+        "messages": [
+            {
+                "role": "user",
+                "content": [
+                    {"type": "text", "text": args.prompt},
+                    {"type": "image_url", "image_url": {"url": b64_image(args.image)}},
+                ],
+            }
+        ],
         "max_tokens": args.max_tokens,
         "temperature": args.temperature,
         "cache_prompt": False,
