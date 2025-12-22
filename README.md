@@ -6,12 +6,12 @@ This repo builds containerized Liquid visual models for DPhi Space.
 
 ### Available Images
 
-| Model Size | Quantization | Base Version | Image Tag |
+| Size | Quantization | Base | Image Tag |
 | --- | --- | --- | --- |
-| 3B | `Q4_0` | `l4t-pytorch` `r36.4.0` | `liquidai/lfm2-vl-3b-gguf:orin-q4-l4t-pytorch-r36.4.0-latest` |
-| 3B | `Q4_0` | `llama-cpp` `r36.4.0` | `liquidai/lfm2-vl-3b-gguf:orin-q4-llama-cpp-r36.4.0-latest` |
-| 1.6B | `Q4_0` | `l4t-pytorch` `r36.4.0` | `liquidai/lfm2-vl-1p6b-gguf:orin-q4-l4t-pytorch-r36.4.0-latest` |
-| 1.6B | `Q4_0` | `llama-cpp` `r36.4.0` | `liquidai/lfm2-vl-1p6b-gguf:orin-q4-llama-cpp-r36.4.0-latest` |
+| 3B | `Q4_0` | [`dustynv/l4t-pytorch:r36.4.0`](https://hub.docker.com/layers/dustynv/l4t-pytorch/r36.4.0) | `liquidai/lfm2-vl-3b-gguf:orin-q4-l4t-pytorch-r36.4.0-latest` |
+| 3B | `Q4_0` | [`dustynv/llama_cpp:0.3.7-r36.4.0`](https://hub.docker.com/layers/dustynv/llama_cpp/0.3.7-r36.4.0) | `liquidai/lfm2-vl-3b-gguf:orin-q4-llama-cpp-r36.4.0-latest` |
+| 1.6B | `Q4_0` | [`dustynv/l4t-pytorch:r36.4.0`](https://hub.docker.com/layers/dustynv/l4t-pytorch/r36.4.0) | `liquidai/lfm2-vl-1p6b-gguf:orin-q4-l4t-pytorch-r36.4.0-latest` |
+| 1.6B | `Q4_0` | [`dustynv/llama_cpp:0.3.7-r36.4.0`](https://hub.docker.com/layers/dustynv/llama_cpp/0.3.7-r36.4.0) | `liquidai/lfm2-vl-1p6b-gguf:orin-q4-llama-cpp-r36.4.0-latest` |
 
 ### Launch the server
 
