@@ -10,8 +10,19 @@ dev = [
 ]
 
 [project.scripts]
-build-orin-1p6b = "dphi_build.cli:build_orin_1p6b"
-build-orin-3b = "dphi_build.cli:build_orin_3b"
+# Orin r36.2.0 builds
+build-orin-r36-2-0-1p6b = "dphi_build.cli:build_orin_r36_2_0_1p6b"
+build-orin-r36-2-0-3b = "dphi_build.cli:build_orin_r36_2_0_3b"
+
+# Orin r36.4.0 builds (for JetPack 6.2.1)
+build-orin-r36-4-0-1p6b = "dphi_build.cli:build_orin_r36_4_0_1p6b"
+build-orin-r36-4-0-3b = "dphi_build.cli:build_orin_r36_4_0_3b"
+
+# Orin dusty-nv llama_cpp builds
+build-orin-dustynv-1p6b = "dphi_build.cli:build_orin_dustynv_1p6b"
+build-orin-dustynv-3b = "dphi_build.cli:build_orin_dustynv_3b"
+
+# GH200 builds
 build-gh200-1p6b = "dphi_build.cli:build_gh200_1p6b"
 build-gh200-3b = "dphi_build.cli:build_gh200_3b"
 
