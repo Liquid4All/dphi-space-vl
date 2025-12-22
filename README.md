@@ -50,14 +50,16 @@ docker run --runtime nvidia --rm --network host \
 
 **1.6B models**
 
+```bash
 docker run --runtime nvidia --rm --network host \
-liquidai/lfm2-vl-1p6b-gguf:orin-q4-r36.4.0-latest
+  liquidai/lfm2-vl-1p6b-gguf:orin-q4-r36.4.0-latest
 
 docker run --runtime nvidia --rm --network host \
-liquidai/lfm2-vl-1p6b-gguf:orin-q4-r36.2.0-latest
+  liquidai/lfm2-vl-1p6b-gguf:orin-q4-r36.2.0-latest
 
 docker run --runtime nvidia --rm --network host \
-liquidai/lfm2-vl-1p6b-gguf:orin-q4-dustynv-r36.4.0-latest
+  liquidai/lfm2-vl-1p6b-gguf:orin-q4-dustynv-r36.4.0-latest
+```
 
 ### Run inference
 
