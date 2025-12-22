@@ -64,7 +64,6 @@ def _docker_build(target: BuildTarget, model: ModelSpec) -> None:
         sha_tag,
         "-t",
         latest_tag,
-        "--push",
         "--build-arg",
         f"BASE_IMAGE={target.base_image}",
         "--build-arg",
