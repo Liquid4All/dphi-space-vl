@@ -54,11 +54,13 @@ def _git_short_sha() -> str:
 
 def _docker_build(target: BuildTarget, model: ModelSpec) -> None:
     sha = _git_short_sha()
-    tag = f"{model.tag_prefix}:{sha}"
+    sha_tag = f"{model.tag_prefix}:{sha}"
+    latest_tag = f"{model.tag_prefix}:latest"
 
     cmd = [
         "docker", "build",
-        "-t", tag,
+        "-t", sha_tag,
+        "-t", latest_tag,
         "--build-arg", f"BASE_IMAGE={target.base_image}",
         "--build-arg", f"CUDA_ARCH={target.cuda_arch}",
         "--build-arg", f"HF_REPO={model.hf_repo}",
