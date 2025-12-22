@@ -1,5 +1,7 @@
 # Liquid VL for [DPhi Space](https://www.dphispace.com/)
 
+This repo builds containerized Liquid visual models for DPhi Space.
+
 ## Run on Orin
 
 **Launch the server**
