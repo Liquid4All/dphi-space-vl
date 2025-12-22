@@ -127,7 +127,7 @@ def build_orin_dustynv_1p6b() -> None:
     # Special target for dusty-nv base
     target = BuildTarget(
         name="orin",
-        base_image="dustynv/llama_cpp:r36.4.0",
+        base_image="dustynv/llama_cpp:0.3.7-r36.4.0",
         cuda_arch="87",
         base_version="dustynv-r36.4.0",
     )
@@ -137,7 +137,7 @@ def build_orin_dustynv_1p6b() -> None:
 def build_orin_dustynv_3b() -> None:
     target = BuildTarget(
         name="orin",
-        base_image="dustynv/llama_cpp:r36.4.0",
+        base_image="dustynv/llama_cpp:0.3.7-r36.4.0",
         cuda_arch="87",
         base_version="dustynv-r36.4.0",
     )

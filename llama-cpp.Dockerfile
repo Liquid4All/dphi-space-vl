@@ -6,7 +6,7 @@
 #
 # Base image: dustynv/llama_cpp:r36.4.0 (or other r36.x versions)
 # ============================================================================
-ARG BASE_IMAGE=dustynv/llama_cpp:r36.4.0
+ARG BASE_IMAGE=dustynv/llama_cpp:0.3.7-r36.4.0
 FROM ${BASE_IMAGE} AS downloader
 
 # ---- Build arguments ----
@@ -29,7 +29,7 @@ RUN mkdir -p /models && \
 # ============================================================================
 # Stage 2: Runtime - Use dusty-nv's llama_cpp
 # ============================================================================
-ARG BASE_IMAGE=dustynv/llama_cpp:r36.4.0
+ARG BASE_IMAGE=dustynv/llama_cpp:0.3.7-r36.4.0
 FROM ${BASE_IMAGE}
 
 # Set environment variables
