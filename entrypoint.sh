@@ -23,4 +23,5 @@ exec /opt/llama.cpp/build/bin/llama-server \
   -b "${BATCH}" \
   -ub "${UBATCH}" \
   -np "${PARALLEL}" \
-  -ngl "${N_GPU_LAYERS}"
+  -ngl "${N_GPU_LAYERS}" \
+  --no-cache-prompt
