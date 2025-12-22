@@ -80,7 +80,7 @@ Or build individual variants:
 uv run build-orin-r36.4.0-1p6b
 uv run build-orin-r36.4.0-3b
 
-# Orin dusty-nv builds (Priority 3)
+# Orin dusty-nv builds (Priority 2)
 uv run build-orin-dustynv-1p6b
 uv run build-orin-dustynv-3b
 
@@ -134,7 +134,7 @@ docker push liquidai/lfm2-vl-1p6b-gguf:orin-q4-r36.4.0-<commit-hash>
 docker push liquidai/lfm2-vl-3b-gguf:orin-q4-r36.4.0-latest
 docker push liquidai/lfm2-vl-3b-gguf:orin-q4-r36.4.0-<commit-hash>
 
-# Push all dusty-nv variants (Priority 3)
+# Push all dusty-nv variants (Priority 2)
 docker push liquidai/lfm2-vl-1p6b-gguf:orin-q4-dustynv-r36.4.0-latest
 docker push liquidai/lfm2-vl-1p6b-gguf:orin-q4-dustynv-r36.4.0-<commit-hash>
 docker push liquidai/lfm2-vl-3b-gguf:orin-q4-dustynv-r36.4.0-latest
