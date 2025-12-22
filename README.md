@@ -17,7 +17,7 @@ docker run --runtime nvidia --rm --network host liquidai/lfm2-vl-1p6b-gguf-q4-or
 **Run inference**
 
 ```bash
-python3 vlm_infer.py \
+python vlm_infer.py \
   --server http://127.0.0.1:8080 \
   --image ./images/example.png \
   --prompt "Describe what you see in the image"
