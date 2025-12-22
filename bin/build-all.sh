@@ -5,6 +5,15 @@ echo "========================================"
 echo "Building all Docker images for testing"
 echo "========================================"
 
+# GH200 builds
+echo ""
+echo "[7/8] Building GH200 - 1.6B..."
+uv run build-gh200-1p6b
+
+echo ""
+echo "[8/8] Building GH200 - 3B..."
+uv run build-gh200-3b
+
 # Priority 1: r36.4.0 builds (exact match for flight hardware)
 echo ""
 echo "[1/8] Building Orin r36.4.0 - 1.6B..."
@@ -31,15 +40,6 @@ uv run build-orin-dustynv-1p6b
 echo ""
 echo "[6/8] Building Orin dusty-nv - 3B..."
 uv run build-orin-dustynv-3b
-
-# GH200 builds
-echo ""
-echo "[7/8] Building GH200 - 1.6B..."
-uv run build-gh200-1p6b
-
-echo ""
-echo "[8/8] Building GH200 - 3B..."
-uv run build-gh200-3b
 
 echo ""
 echo "========================================"
