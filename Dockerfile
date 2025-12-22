@@ -66,8 +66,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/* \
     && apt-get clean
 
-# Copy compiled llama.cpp server from builder
-COPY --from=builder /opt/llama.cpp/build/bin/llama-server /usr/local/bin/llama-server
+# Copy entire build output (includes llama-server binary and any .so libraries)
+COPY --from=builder /opt/llama.cpp/build/bin/ /usr/local/bin/
+RUN ldconfig
 
 # Copy model files from builder
 COPY --from=builder /models/model.gguf /models/model.gguf
