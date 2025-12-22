@@ -35,6 +35,13 @@ RUN git clone https://github.com/ggml-org/llama.cpp.git && \
     cmake --build build --config Release && \
     strip build/bin/llama-server
 
+# Collect runtime dependencies
+RUN mkdir -p /runtime-libs && \
+    ldd /opt/llama.cpp/build/bin/llama-server | \
+    grep "=> /" | \
+    awk '{print $3}' | \
+    xargs -I {} cp -L {} /runtime-libs/ || true
+
 # Download model files
 RUN mkdir -p /models && \
     echo "Downloading from HF repo: ${HF_REPO}" && \
@@ -68,6 +75,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 # Copy entire build output (includes llama-server binary and any .so libraries)
 COPY --from=builder /opt/llama.cpp/build/bin/ /usr/local/bin/
+# Copy all runtime dependencies collected in builder stage
+COPY --from=builder /runtime-libs/ /usr/local/lib/
+
 RUN ldconfig
 
 # Copy model files from builder
