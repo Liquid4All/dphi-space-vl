@@ -10,10 +10,6 @@ dev = [
 ]
 
 [project.scripts]
-# Orin r36.2.0 builds
-build-orin-r36-2-0-1p6b = "dphi_build.cli:build_orin_r36_2_0_1p6b"
-build-orin-r36-2-0-3b = "dphi_build.cli:build_orin_r36_2_0_3b"
-
 # Orin r36.4.0 builds (for JetPack 6.2.1)
 build-orin-r36-4-0-1p6b = "dphi_build.cli:build_orin_r36_4_0_1p6b"
 build-orin-r36-4-0-3b = "dphi_build.cli:build_orin_r36_4_0_3b"

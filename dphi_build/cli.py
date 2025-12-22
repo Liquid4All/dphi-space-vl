@@ -9,7 +9,7 @@ class BuildTarget:
     name: str
     base_image: str
     cuda_arch: str
-    base_version: str  # For tagging: r36.2.0, r36.4.0, etc.
+    base_version: str  # For tagging: r36.4.0
 
 
 @dataclass(frozen=True)
@@ -20,14 +20,6 @@ class ModelSpec:
     mmproj_file: str
     quantization: str  # For tagging: q4, q8, etc.
 
-
-# Orin targets with different JetPack versions
-ORIN_R36_2_0 = BuildTarget(
-    name="orin",
-    base_image="dustynv/l4t-pytorch:r36.2.0",
-    cuda_arch="87",
-    base_version="r36.2.0",
-)
 
 ORIN_R36_4_0 = BuildTarget(
     name="orin",
@@ -96,17 +88,6 @@ def _docker_build(target: BuildTarget, model: ModelSpec, dockerfile: str) -> Non
 
     print("Running:", " ".join(cmd))
     subprocess.run(cmd, check=True)
-
-
-# ============================================================================
-# Orin builds with r36.2.0 base
-# ============================================================================
-def build_orin_r36_2_0_1p6b() -> None:
-    _docker_build(ORIN_R36_2_0, MODEL_1P6B, dockerfile="l4t-pytorch.Dockerfile")
-
-
-def build_orin_r36_2_0_3b() -> None:
-    _docker_build(ORIN_R36_2_0, MODEL_3B, dockerfile="l4t-pytorch.Dockerfile")
 
 
 # ============================================================================
