@@ -4,6 +4,11 @@ version = "0.1.0"
 requires-python = ">=3.10"
 dependencies = []
 
+[dependency-groups]
+dev = [
+    "ruff>=0.8.0",
+]
+
 [project.scripts]
 build-orin-1p6b = "dphi_build.cli:build_orin_1p6b"
 build-orin-3b = "dphi_build.cli:build_orin_3b"

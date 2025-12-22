@@ -58,14 +58,22 @@ def _docker_build(target: BuildTarget, model: ModelSpec) -> None:
     latest_tag = f"{model.tag_prefix}:latest"
 
     cmd = [
-        "docker", "build",
-        "-t", sha_tag,
-        "-t", latest_tag,
-        "--build-arg", f"BASE_IMAGE={target.base_image}",
-        "--build-arg", f"CUDA_ARCH={target.cuda_arch}",
-        "--build-arg", f"HF_REPO={model.hf_repo}",
-        "--build-arg", f"TEXT_FILE={model.text_file}",
-        "--build-arg", f"MMPROJ_FILE={model.mmproj_file}",
+        "docker",
+        "build",
+        "-t",
+        sha_tag,
+        "-t",
+        latest_tag,
+        "--build-arg",
+        f"BASE_IMAGE={target.base_image}",
+        "--build-arg",
+        f"CUDA_ARCH={target.cuda_arch}",
+        "--build-arg",
+        f"HF_REPO={model.hf_repo}",
+        "--build-arg",
+        f"TEXT_FILE={model.text_file}",
+        "--build-arg",
+        f"MMPROJ_FILE={model.mmproj_file}",
         ".",
     ]
 
