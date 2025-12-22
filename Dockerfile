@@ -1,9 +1,14 @@
-FROM nvcr.io/nvidia/pytorch:25.05-py3
+# Dockerfile (unified)
+
+# Choose platform base at build time:
+#   Orin:  dustynv/l4t-pytorch:r36.2.0
+#   GH200: nvcr.io/nvidia/pytorch:25.05-py3
+ARG BASE_IMAGE=dustynv/l4t-pytorch:r36.2.0
+FROM ${BASE_IMAGE}
 
 # ---- llama.cpp build settings ----
-ARG LLAMA_CPP_REF=master
-# GH200 is Hopper-family; build for SM90
-ARG CUDA_ARCH=90
+ARG LLAMA_CPP_REF=b7406
+ARG CUDA_ARCH=87
 
 # ---- model selection ----
 ARG HF_REPO=LiquidAI/LFM2-VL-3B-GGUF
@@ -19,11 +24,10 @@ ENV DEBIAN_FRONTEND=noninteractive \
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
       git cmake ninja-build build-essential pkg-config \
-      ca-certificates curl \
-      libcurl4-openssl-dev \
+      ca-certificates curl libcurl4-openssl-dev \
+      python3 python3-pip \
     && rm -rf /var/lib/apt/lists/*
 
-# Build llama.cpp with CUDA
 WORKDIR /opt
 RUN git clone https://github.com/ggml-org/llama.cpp.git && \
     cd llama.cpp && \
