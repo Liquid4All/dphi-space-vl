@@ -14,7 +14,7 @@ PARALLEL="${N_PARALLEL:-1}"
 BATCH="${BATCH_SIZE:-512}"
 UBATCH="${UBATCH_SIZE:-128}"
 
-exec /opt/llama.cpp/build/bin/llama-server \
+exec /usr/local/bin/llama-server \
   --host "${HOST}" \
   --port "${PORT}" \
   -m "${MODEL_PATH}" \
