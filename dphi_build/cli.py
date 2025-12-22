@@ -101,11 +101,15 @@ def _docker_build(target: BuildTarget, model: ModelSpec, dockerfile: str) -> Non
 # Orin builds with l4t pytorch r36.4.0 base (for JetPack 6.2.1)
 # ============================================================================
 def build_orin_l4t_pytorch_r36_4_0_1p6b() -> None:
-    _docker_build(ORIN_L4T_PYTORCH_R36_4_0, MODEL_1P6B, dockerfile="l4t-pytorch.Dockerfile")
+    _docker_build(
+        ORIN_L4T_PYTORCH_R36_4_0, MODEL_1P6B, dockerfile="l4t-pytorch.Dockerfile"
+    )
 
 
 def build_orin_l4t_pytorch_r36_4_0_3b() -> None:
-    _docker_build(ORIN_L4T_PYTORCH_R36_4_0, MODEL_3B, dockerfile="l4t-pytorch.Dockerfile")
+    _docker_build(
+        ORIN_L4T_PYTORCH_R36_4_0, MODEL_3B, dockerfile="l4t-pytorch.Dockerfile"
+    )
 
 
 # ============================================================================
