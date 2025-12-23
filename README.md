@@ -8,19 +8,25 @@ This repo builds containerized Liquid visual models for DPhi Space.
 
 | Size | Quantization | Base | Image Tag |
 | --- | --- | --- | --- |
-| 3B | `Q4_0` | [`dustynv/l4t-pytorch:r36.4.0`](https://hub.docker.com/layers/dustynv/l4t-pytorch/r36.4.0) | `liquidai/lfm2-vl-3b-gguf:orin-q4-l4t-pytorch-r36.4.0-latest` |
-| 1.6B | `Q4_0` | [`dustynv/l4t-pytorch:r36.4.0`](https://hub.docker.com/layers/dustynv/l4t-pytorch/r36.4.0) | `liquidai/lfm2-vl-1p6b-gguf:orin-q4-l4t-pytorch-r36.4.0-latest` |
+| 3B | `Q4_0` | [`dustynv/l4t-ml:r36.4.0`](https://hub.docker.com/layers/dustynv/l4t-ml/r36.4.0) | `liquidai/lfm2-vl-3b-gguf:orin-q4-latest` |
+| 1.6B | `Q4_0` | [`dustynv/l4t-ml:r36.4.0`](https://hub.docker.com/layers/dustynv/l4t-ml/r36.4.0) | `liquidai/lfm2-vl-1p6b-gguf:orin-q4-latest` |
+
+### Build images
+
+```bash
+bin/build-orin.sh
+```
 
 ### Launch the server
 
 ```bash
 # 3b
 docker run --runtime nvidia --rm --network host \
-  liquidai/lfm2-vl-3b-gguf:orin-q4-l4t-pytorch-r36.4.0-latest
+  liquidai/lfm2-vl-3b-gguf:orin-q4-latest
 
 # 1.6b
 docker run --runtime nvidia --rm --network host \
-  liquidai/lfm2-vl-1p6b-gguf:orin-q4-l4t-pytorch-r36.4.0-latest
+  liquidai/lfm2-vl-1p6b-gguf:orin-q4-latest
 ```
 
 These docker environment flags are supported by the entrypoint script to configure the `llama-cpp` server:
@@ -44,7 +50,7 @@ docker run --runtime nvidia --rm --network host \
   -e CTX_SIZE=2048 \
   -e BATCH_SIZE=64 \
   -e UBATCH_SIZE=32 \
-  liquidai/lfm2-vl-3b-gguf:orin-q4-l4t-pytorch-r36.4.0-latest
+  liquidai/lfm2-vl-3b-gguf:orin-q4-latest
 ```
 
 ### Run inference
@@ -64,6 +70,9 @@ These images should be optimized for:
 
 ## For Development
 
+<details>
+<summary>(Click to expand)</summary>
+
 Development runs on GH200 on Lambda Labs, as we don't currently have Jetson Orin hardware for local testing.
 
 ### Build All Images
@@ -77,13 +86,13 @@ To build all variants at once:
 Or build individual variants:
 
 ```bash
-# Orin l4t pytorch builds
-uv run build-orin-l4t-pytorch-1p6b
-uv run build-orin-l4t-pytorch-3b
+# Orin builds
+uv run build-orin-1p6b
+uv run build-orin-3b
 
 # GH200 builds (for development testing)
-uv run build-gh200-l4t-pytorch-1p6b
-uv run build-gh200-l4t-pytorch-3b
+uv run build-gh200-1p6b
+uv run build-gh200-3b
 ```
 
 ### Test on GH200
@@ -92,10 +101,10 @@ uv run build-gh200-l4t-pytorch-3b
 
 ```bash
 # Run 3B model
-bin/run-vl.sh liquidai/lfm2-vl-3b-gguf:gh200-q4-l4t-pytorch-25.05-latest
+bin/run-vl.sh liquidai/lfm2-vl-3b-gguf:gh200-q4-latest
 
 # Run 1.6B model
-bin/run-vl.sh liquidai/lfm2-vl-1p6b-gguf:gh200-q4-l4t-pytorch-25.05-latest
+bin/run-vl.sh liquidai/lfm2-vl-1p6b-gguf:gh200-q4-latest
 ```
 
 > [!NOTE]
@@ -116,20 +125,22 @@ bin/test-vl.sh
 **Push Orin images for DPhi Space testing:**
 
 ```bash
-docker push liquidai/lfm2-vl-1p6b-gguf:orin-q4-l4t-pytorch-r36.4.0-latest
-docker push liquidai/lfm2-vl-1p6b-gguf:orin-q4-l4t-pytorch-r36.4.0-<commit-hash>
-docker push liquidai/lfm2-vl-3b-gguf:orin-q4-l4t-pytorch-r36.4.0-latest
-docker push liquidai/lfm2-vl-3b-gguf:orin-q4-l4t-pytorch-r36.4.0-<commit-hash>
+docker push liquidai/lfm2-vl-1p6b-gguf:orin-q4-latest
+docker push liquidai/lfm2-vl-1p6b-gguf:orin-q4-<commit-hash>
+docker push liquidai/lfm2-vl-3b-gguf:orin-q4-latest
+docker push liquidai/lfm2-vl-3b-gguf:orin-q4-<commit-hash>
 ```
 
 **Push GH200 images for development:**
 
 ```bash
-docker push liquidai/lfm2-vl-1p6b-gguf:gh200-q4-25.05-latest
-docker push liquidai/lfm2-vl-1p6b-gguf:gh200-q4-25.05-<commit-hash>
-docker push liquidai/lfm2-vl-3b-gguf:gh200-q4-25.05-latest
-docker push liquidai/lfm2-vl-3b-gguf:gh200-q4-25.05-<commit-hash>
+docker push liquidai/lfm2-vl-1p6b-gguf:gh200-q4-latest
+docker push liquidai/lfm2-vl-1p6b-gguf:gh200-q4-<commit-hash>
+docker push liquidai/lfm2-vl-3b-gguf:gh200-q4-latest
+docker push liquidai/lfm2-vl-3b-gguf:gh200-q4-<commit-hash>
 ```
+
+</details>
 
 ## License
 

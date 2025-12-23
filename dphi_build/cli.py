@@ -9,7 +9,6 @@ class BuildTarget:
     name: str
     base_image: str
     cuda_arch: str
-    base_version: str  # For tagging: r36.4.0
 
 
 @dataclass(frozen=True)
@@ -21,18 +20,16 @@ class ModelSpec:
     quantization: str  # For tagging: q4, q8, etc.
 
 
-ORIN_L4T_PYTORCH_R36_4_0 = BuildTarget(
+ORIN_BUILD_TARGET = BuildTarget(
     name="orin",
-    base_image="dustynv/l4t-pytorch:r36.4.0",
+    base_image="dustynv/l4t-ml:r36.4.0",
     cuda_arch="87",
-    base_version="l4t-pytorch-r36.4.0",
 )
 
-GH200_L4T_PYTORCH = BuildTarget(
+GH200_BUILD_TARGET = BuildTarget(
     name="gh200",
     base_image="nvcr.io/nvidia/pytorch:25.05-py3",
     cuda_arch="90",
-    base_version="l4t-pytorch-25.05",
 )
 
 MODEL_1P6B = ModelSpec(
@@ -57,10 +54,12 @@ def _git_short_sha() -> str:
     return out.strip()
 
 
-def _docker_build(target: BuildTarget, model: ModelSpec, dockerfile: str) -> None:
+def _docker_build(
+    target: BuildTarget, model: ModelSpec, dockerfile: str = "Dockerfile"
+) -> None:
     sha = _git_short_sha()
-    sha_tag = f"{model.tag_prefix}:{target.name}-{model.quantization}-{target.base_version}-{sha}"
-    latest_tag = f"{model.tag_prefix}:{target.name}-{model.quantization}-{target.base_version}-latest"
+    sha_tag = f"{model.tag_prefix}:{target.name}-{model.quantization}-{sha}"
+    latest_tag = f"{model.tag_prefix}:{target.name}-{model.quantization}-latest"
 
     cmd = [
         "docker",
@@ -89,26 +88,22 @@ def _docker_build(target: BuildTarget, model: ModelSpec, dockerfile: str) -> Non
 
 
 # ============================================================================
-# Orin builds with l4t pytorch r36.4.0 base (for JetPack 6.2.1)
+# Orin builds (for JetPack 6.2.1)
 # ============================================================================
-def build_orin_l4t_pytorch_r36_4_0_1p6b() -> None:
-    _docker_build(
-        ORIN_L4T_PYTORCH_R36_4_0, MODEL_1P6B, dockerfile="l4t-pytorch.Dockerfile"
-    )
+def build_orin_1p6b() -> None:
+    _docker_build(ORIN_BUILD_TARGET, MODEL_1P6B)
 
 
-def build_orin_l4t_pytorch_r36_4_0_3b() -> None:
-    _docker_build(
-        ORIN_L4T_PYTORCH_R36_4_0, MODEL_3B, dockerfile="l4t-pytorch.Dockerfile"
-    )
+def build_orin_3b() -> None:
+    _docker_build(ORIN_BUILD_TARGET, MODEL_3B)
 
 
 # ============================================================================
 # GH200 builds
 # ============================================================================
-def build_gh200_l4t_pytorch_1p6b() -> None:
-    _docker_build(GH200_L4T_PYTORCH, MODEL_1P6B, dockerfile="l4t-pytorch.Dockerfile")
+def build_gh200_1p6b() -> None:
+    _docker_build(GH200_BUILD_TARGET, MODEL_1P6B)
 
 
-def build_gh200_l4t_pytorch_3b() -> None:
-    _docker_build(GH200_L4T_PYTORCH, MODEL_3B, dockerfile="l4t-pytorch.Dockerfile")
+def build_gh200_3b() -> None:
+    _docker_build(GH200_BUILD_TARGET, MODEL_3B)

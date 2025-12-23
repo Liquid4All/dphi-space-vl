@@ -2,9 +2,9 @@
 # Stage 1: Builder - Compile llama.cpp and download models
 # ============================================================================
 # Choose platform base at build time:
-#   Orin:  dustynv/l4t-pytorch:r36.4.0
+#   Orin:  dustynv/l4t-ml:r36.4.0
 #   GH200: nvcr.io/nvidia/pytorch:25.05-py3
-ARG BASE_IMAGE=dustynv/l4t-pytorch:r36.4.0
+ARG BASE_IMAGE=dustynv/l4t-ml:r36.4.0
 FROM ${BASE_IMAGE} AS builder
 
 # ---- Build arguments ----
@@ -55,7 +55,7 @@ RUN mkdir -p /models && \
 # ============================================================================
 # Stage 2: Runtime - Minimal image with only required components
 # ============================================================================
-ARG BASE_IMAGE=dustynv/l4t-pytorch:r36.4.0
+ARG BASE_IMAGE=dustynv/l4t-ml:r36.4.0
 FROM ${BASE_IMAGE}
 
 # Set environment variables

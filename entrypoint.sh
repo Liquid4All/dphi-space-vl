@@ -1,9 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Find llama-server binary - different locations for different base images
-# l4t-pytorch builds: /usr/local/bin/llama-server
-# llama-cpp builds: /opt/llama.cpp/build/bin/llama-server or in PATH
 if [ -f /usr/local/bin/llama-server ]; then
     LLAMA_SERVER="/usr/local/bin/llama-server"
 elif [ -f /opt/llama.cpp/build/bin/llama-server ]; then

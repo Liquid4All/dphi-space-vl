@@ -10,13 +10,13 @@ dev = [
 ]
 
 [project.scripts]
-# Orin l4t pytorch builds (for JetPack 6.2.1)
-build-orin-l4t-pytorch-1p6b = "dphi_build.cli:build_orin_l4t_pytorch_r36_4_0_1p6b"
-build-orin-l4t-pytorch-3b = "dphi_build.cli:build_orin_l4t_pytorch_r36_4_0_3b"
+# Orin builds (for JetPack 6.2.1)
+build-orin-1p6b = "dphi_build.cli:build_orin_1p6b"
+build-orin-3b = "dphi_build.cli:build_orin_3b"
 
 # GH200 builds
-build-gh200-l4t-pytorch-1p6b = "dphi_build.cli:build_gh200_l4t_pytorch_1p6b"
-build-gh200-l4t-pytorch-3b = "dphi_build.cli:build_gh200_l4t_pytorch_3b"
+build-gh200-1p6b = "dphi_build.cli:build_gh200_1p6b"
+build-gh200-3b = "dphi_build.cli:build_gh200_3b"
 
 [tool.setuptools]
 packages = ["dphi_build"]
