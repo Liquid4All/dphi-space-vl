@@ -188,4 +188,4 @@ docker push liquidai/lfm2-vl-3b-gguf:gh200-q4-25.05-<commit-hash>
 
 ## License
 
-[LFM Open License v1.0](./LICENSE)
+MIT + LFM Open License v1.0. See [LICENSE](./LICENSE) for details.
