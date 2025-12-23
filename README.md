@@ -8,23 +8,33 @@ This repo builds containerized Liquid visual models for DPhi Space.
 
 | Size | Quantization | Base | Image Tag |
 | --- | --- | --- | --- |
+| 3B | `Q8_0` | [`dustynv/l4t-ml:r36.4.0`](https://hub.docker.com/layers/dustynv/l4t-ml/r36.4.0) | `liquidai/lfm2-vl-3b-gguf:orin-q8-latest` |
 | 3B | `Q4_0` | [`dustynv/l4t-ml:r36.4.0`](https://hub.docker.com/layers/dustynv/l4t-ml/r36.4.0) | `liquidai/lfm2-vl-3b-gguf:orin-q4-latest` |
+| 1.6B | `Q8_0` | [`dustynv/l4t-ml:r36.4.0`](https://hub.docker.com/layers/dustynv/l4t-ml/r36.4.0) | `liquidai/lfm2-vl-1p6b-gguf:orin-q8-latest` |
 | 1.6B | `Q4_0` | [`dustynv/l4t-ml:r36.4.0`](https://hub.docker.com/layers/dustynv/l4t-ml/r36.4.0) | `liquidai/lfm2-vl-1p6b-gguf:orin-q4-latest` |
 
 ### Build images
 
 ```bash
-bin/build-orin.sh
+bin/build-orin.sh [--quantization q8|q4]
 ```
+
+The `--quantization` option defaults to q8.
 
 ### Launch the server
 
 ```bash
 # 3b
 docker run --runtime nvidia --rm --network host \
+  liquidai/lfm2-vl-3b-gguf:orin-q8-latest
+  
+  docker run --runtime nvidia --rm --network host \
   liquidai/lfm2-vl-3b-gguf:orin-q4-latest
 
 # 1.6b
+docker run --runtime nvidia --rm --network host \
+  liquidai/lfm2-vl-1p6b-gguf:orin-q8-latest
+  
 docker run --runtime nvidia --rm --network host \
   liquidai/lfm2-vl-1p6b-gguf:orin-q4-latest
 ```
@@ -68,6 +78,23 @@ These images should be optimized for:
 - **Jetson Orin 16GB**
 - **JetPack 6.2.1** (L4T 36.4.4, CUDA 12.6)
 
+### Performance and Resource Consumption
+
+| Model Size | Quantization | Model VRAM usage (GB) | Peak memory utilization (%) | Token per sec |
+| --- | --- | --- | --- | --- |
+| 3B   | `Q8_0` | 4.2 | 30% | 340 |
+| 3B   | `Q4_0` | 3.0 | 20% | 400 |
+| 1.6B | `Q8_0` | 2.8 | 25% | 610 |
+| 1.6B | `Q4_0` | 2.2 | 16% | 700 |
+
+All numbers are measured on GH200 with the following command:
+
+```bash
+nvidia-smi --query-gpu=timestamp,name,utilization.gpu,utilization.memory,memory.used,memory.total,temperature.gpu --format=csv -l 1
+```
+
+GPU utilization can reach 100% during inference.
+
 ## For Development
 
 <details>
@@ -87,12 +114,16 @@ Or build individual variants:
 
 ```bash
 # Orin builds
-uv run build-orin-1p6b
-uv run build-orin-3b
+uv run build-orin-1p6b-q8
+uv run build-orin-1p6b-q4
+uv run build-orin-3b-q8
+uv run build-orin-3b-q4
 
 # GH200 builds (for development testing)
-uv run build-gh200-1p6b
-uv run build-gh200-3b
+uv run build-gh200-1p6b-q8
+uv run build-gh200-1p6b-q4
+uv run build-gh200-3b-q8
+uv run build-gh200-3b-q4
 ```
 
 ### Test on GH200
@@ -101,9 +132,11 @@ uv run build-gh200-3b
 
 ```bash
 # Run 3B model
+bin/run-vl.sh liquidai/lfm2-vl-3b-gguf:gh200-q8-latest
 bin/run-vl.sh liquidai/lfm2-vl-3b-gguf:gh200-q4-latest
 
 # Run 1.6B model
+bin/run-vl.sh liquidai/lfm2-vl-1p6b-gguf:gh200-q8-latest
 bin/run-vl.sh liquidai/lfm2-vl-1p6b-gguf:gh200-q4-latest
 ```
 
