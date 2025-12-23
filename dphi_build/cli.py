@@ -64,6 +64,7 @@ MODEL_3B_Q4 = ModelSpec(
     quantization="q4",
 )
 
+
 def _git_short_sha() -> str:
     out = subprocess.check_output(["git", "rev-parse", "--short=10", "HEAD"], text=True)
     return out.strip()
@@ -120,6 +121,7 @@ def build_orin_3b_q8() -> None:
 def build_orin_3b_q4() -> None:
     _docker_build(ORIN_BUILD_TARGET, MODEL_3B_Q4)
 
+
 # ============================================================================
 # GH200 builds
 # ============================================================================
@@ -133,6 +135,7 @@ def build_gh200_1p6b_q4() -> None:
 
 def build_gh200_3b_q8() -> None:
     _docker_build(GH200_BUILD_TARGET, MODEL_3B_Q8)
+
 
 def build_gh200_3b_q4() -> None:
     _docker_build(GH200_BUILD_TARGET, MODEL_3B_Q4)
