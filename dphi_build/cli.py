@@ -35,7 +35,7 @@ GH200_BUILD_TARGET = BuildTarget(
 MODEL_1P6B = ModelSpec(
     tag_prefix="liquidai/lfm2-vl-1p6b-gguf",
     hf_repo="LiquidAI/LFM2-VL-1.6B-GGUF",
-    text_file="LFM2-VL-1.6B-Q4_0.gguf",
+    text_file="LFM2-VL-1.6B-Q8_0.gguf",
     mmproj_file="mmproj-LFM2-VL-1.6B-Q8_0.gguf",
     quantization="q4",
 )
@@ -43,7 +43,7 @@ MODEL_1P6B = ModelSpec(
 MODEL_3B = ModelSpec(
     tag_prefix="liquidai/lfm2-vl-3b-gguf",
     hf_repo="LiquidAI/LFM2-VL-3B-GGUF",
-    text_file="LFM2-VL-3B-Q4_0.gguf",
+    text_file="LFM2-VL-3B-Q8_0.gguf",
     mmproj_file="mmproj-LFM2-VL-3B-Q8_0.gguf",
     quantization="q4",
 )
