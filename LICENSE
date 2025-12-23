@@ -1,3 +1,9 @@
+This repository contains software subject to multiple licenses:
+
+Liquid Foundation Model (LFM) - The LFM model and associated model weights are licensed under the LFM Open License v1.0, the full text of which is set forth below.
+
+llama.cpp - The llama.cpp software is licensed under the MIT License. See https://github.com/ggml-org/llama.cpp/blob/master/LICENSE for the full license text.
+
 LFM Open License v1.0
 
 TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
