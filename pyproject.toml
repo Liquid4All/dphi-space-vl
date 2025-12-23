@@ -14,10 +14,6 @@ dev = [
 build-orin-l4t-pytorch-1p6b = "dphi_build.cli:build_orin_l4t_pytorch_r36_4_0_1p6b"
 build-orin-l4t-pytorch-3b = "dphi_build.cli:build_orin_l4t_pytorch_r36_4_0_3b"
 
-# Orin llama_cpp builds
-build-orin-llama-cpp-1p6b = "dphi_build.cli:build_orin_llama_cpp_r36_4_0_1p6b"
-build-orin-llama-cpp-3b = "dphi_build.cli:build_orin_llama_cpp_r36_4_0_3b"
-
 # GH200 builds
 build-gh200-l4t-pytorch-1p6b = "dphi_build.cli:build_gh200_l4t_pytorch_1p6b"
 build-gh200-l4t-pytorch-3b = "dphi_build.cli:build_gh200_l4t_pytorch_3b"

@@ -9,30 +9,18 @@ This repo builds containerized Liquid visual models for DPhi Space.
 | Size | Quantization | Base | Image Tag |
 | --- | --- | --- | --- |
 | 3B | `Q4_0` | [`dustynv/l4t-pytorch:r36.4.0`](https://hub.docker.com/layers/dustynv/l4t-pytorch/r36.4.0) | `liquidai/lfm2-vl-3b-gguf:orin-q4-l4t-pytorch-r36.4.0-latest` |
-| 3B | `Q4_0` | [`dustynv/llama_cpp:0.3.7-r36.4.0`](https://hub.docker.com/layers/dustynv/llama_cpp/0.3.7-r36.4.0) | `liquidai/lfm2-vl-3b-gguf:orin-q4-llama-cpp-r36.4.0-latest` |
 | 1.6B | `Q4_0` | [`dustynv/l4t-pytorch:r36.4.0`](https://hub.docker.com/layers/dustynv/l4t-pytorch/r36.4.0) | `liquidai/lfm2-vl-1p6b-gguf:orin-q4-l4t-pytorch-r36.4.0-latest` |
-| 1.6B | `Q4_0` | [`dustynv/llama_cpp:0.3.7-r36.4.0`](https://hub.docker.com/layers/dustynv/llama_cpp/0.3.7-r36.4.0) | `liquidai/lfm2-vl-1p6b-gguf:orin-q4-llama-cpp-r36.4.0-latest` |
 
 ### Launch the server
 
-**3B models**
-
 ```bash
+# 3b
 docker run --runtime nvidia --rm --network host \
   liquidai/lfm2-vl-3b-gguf:orin-q4-l4t-pytorch-r36.4.0-latest
 
-docker run --runtime nvidia --rm --network host \
-  liquidai/lfm2-vl-3b-gguf:orin-q4-llama-cpp-r36.4.0-latest
-```
-
-**1.6B models**
-
-```bash
+# 1.6b
 docker run --runtime nvidia --rm --network host \
   liquidai/lfm2-vl-1p6b-gguf:orin-q4-l4t-pytorch-r36.4.0-latest
-
-docker run --runtime nvidia --rm --network host \
-  liquidai/lfm2-vl-1p6b-gguf:orin-q4-llama-cpp-r36.4.0-latest
 ```
 
 These docker environment flags are supported by the entrypoint script to configure the `llama-cpp` server:
@@ -89,13 +77,9 @@ To build all variants at once:
 Or build individual variants:
 
 ```bash
-# Orin l4t pytorch builds (Priority 1)
+# Orin l4t pytorch builds
 uv run build-orin-l4t-pytorch-1p6b
 uv run build-orin-l4t-pytorch-3b
-
-# Orin llama-cpp builds (Priority 2)
-uv run build-orin-llama-cpp-1p6b
-uv run build-orin-llama-cpp-3b
 
 # GH200 builds (for development testing)
 uv run build-gh200-l4t-pytorch-1p6b
@@ -127,31 +111,15 @@ bin/run-vl.sh liquidai/lfm2-vl-1p6b-gguf:gh200-q4-l4t-pytorch-25.05-latest
 bin/test-vl.sh
 ```
 
-### Tag Naming Convention
-
-Images are tagged as: `<repo>:<target>-<quantization>-<base-version>-<commit-hash|latest>`
-
-**Examples:**
-- `liquidai/lfm2-vl-3b-gguf:orin-q4-r36.4.0-abc1234567` - Specific commit
-- `liquidai/lfm2-vl-3b-gguf:orin-q4-r36.4.0-latest` - Latest for this config
-- `liquidai/lfm2-vl-3b-gguf:gh200-q4-25.05-latest` - GH200 variant
-
 ### Publish to Docker Hub
 
 **Push Orin images for DPhi Space testing:**
 
 ```bash
-# Push all r36.4.0 variants (Priority 1)
-docker push liquidai/lfm2-vl-1p6b-gguf:orin-q4-r36.4.0-latest
-docker push liquidai/lfm2-vl-1p6b-gguf:orin-q4-r36.4.0-<commit-hash>
-docker push liquidai/lfm2-vl-3b-gguf:orin-q4-r36.4.0-latest
-docker push liquidai/lfm2-vl-3b-gguf:orin-q4-r36.4.0-<commit-hash>
-
-# Push all dusty-nv variants (Priority 2)
-docker push liquidai/lfm2-vl-1p6b-gguf:orin-q4-dustynv-r36.4.0-latest
-docker push liquidai/lfm2-vl-1p6b-gguf:orin-q4-dustynv-r36.4.0-<commit-hash>
-docker push liquidai/lfm2-vl-3b-gguf:orin-q4-dustynv-r36.4.0-latest
-docker push liquidai/lfm2-vl-3b-gguf:orin-q4-dustynv-r36.4.0-<commit-hash>
+docker push liquidai/lfm2-vl-1p6b-gguf:orin-q4-l4t-pytorch-r36.4.0-latest
+docker push liquidai/lfm2-vl-1p6b-gguf:orin-q4-l4t-pytorch-r36.4.0-<commit-hash>
+docker push liquidai/lfm2-vl-3b-gguf:orin-q4-l4t-pytorch-r36.4.0-latest
+docker push liquidai/lfm2-vl-3b-gguf:orin-q4-l4t-pytorch-r36.4.0-<commit-hash>
 ```
 
 **Push GH200 images for development:**
@@ -162,29 +130,6 @@ docker push liquidai/lfm2-vl-1p6b-gguf:gh200-q4-25.05-<commit-hash>
 docker push liquidai/lfm2-vl-3b-gguf:gh200-q4-25.05-latest
 docker push liquidai/lfm2-vl-3b-gguf:gh200-q4-25.05-<commit-hash>
 ```
-
-### Build System Architecture
-
-**Dockerfiles:**
-- `l4t-pytorch.Dockerfile` - Builds llama.cpp from scratch (used for r36.4.0 and GH200)
-- `llama-cpp.Dockerfile` - Uses dusty-nv's pre-built llama_cpp container (used for dusty-nv variants)
-
-**Build Targets:**
-- **Orin r36.4.0**: Updated builds, L4T 36.4.0, CUDA 12.6 (matches DPhi's JetPack 6.2.1)
-- **Orin dusty-nv**: Pre-validated llama_cpp binaries from jetson-containers
-- **GH200**: Development builds, CUDA 13.0, compute capability 90
-
-### Technical Notes
-
-**Why multiple base versions?**
-- r36.4.0 matches DPhi's JetPack 6.2.1 (CUDA 12.6) most closely
-- ABI compatibility issues between CUDA 12.2 and 12.6 can cause "double free or corruption" errors
-- dusty-nv builds provide community-validated fallback if compilation issues persist
-
-**Optimization for satellite deployment:**
-- Q4_0 quantization prioritizes power efficiency over absolute accuracy
-- Multi-stage Docker builds minimize image size for bandwidth-constrained uploads
-- Thermal and memory headroom considerations for extended space operations
 
 ## License
 
