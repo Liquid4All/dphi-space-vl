@@ -10,7 +10,7 @@ dev = [
 ]
 
 [project.scripts]
-# Orin l4t pytorch builds (for JetPack 6.2.1)
+# Orin builds (for JetPack 6.2.1)
 build-orin-1p6b = "dphi_build.cli:build_orin_1p6b"
 build-orin-3b = "dphi_build.cli:build_orin_3b"
 

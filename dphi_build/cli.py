@@ -20,13 +20,13 @@ class ModelSpec:
     quantization: str  # For tagging: q4, q8, etc.
 
 
-ORIN_L4T_PYTORCH_R36_4_0 = BuildTarget(
+ORIN_BUILD_TARGET = BuildTarget(
     name="orin",
     base_image="dustynv/l4t-ml:r36.4.0",
     cuda_arch="87",
 )
 
-GH200_L4T_PYTORCH = BuildTarget(
+GH200_BUILD_TARGET = BuildTarget(
     name="gh200",
     base_image="nvcr.io/nvidia/pytorch:25.05-py3",
     cuda_arch="90",
@@ -88,22 +88,22 @@ def _docker_build(
 
 
 # ============================================================================
-# Orin builds with l4t pytorch r36.4.0 base (for JetPack 6.2.1)
+# Orin builds (for JetPack 6.2.1)
 # ============================================================================
 def build_orin_1p6b() -> None:
-    _docker_build(ORIN_L4T_PYTORCH_R36_4_0, MODEL_1P6B)
+    _docker_build(ORIN_BUILD_TARGET, MODEL_1P6B)
 
 
 def build_orin_3b() -> None:
-    _docker_build(ORIN_L4T_PYTORCH_R36_4_0, MODEL_3B)
+    _docker_build(ORIN_BUILD_TARGET, MODEL_3B)
 
 
 # ============================================================================
 # GH200 builds
 # ============================================================================
 def build_gh200_1p6b() -> None:
-    _docker_build(GH200_L4T_PYTORCH, MODEL_1P6B)
+    _docker_build(GH200_BUILD_TARGET, MODEL_1P6B)
 
 
 def build_gh200_3b() -> None:
-    _docker_build(GH200_L4T_PYTORCH, MODEL_3B)
+    _docker_build(GH200_BUILD_TARGET, MODEL_3B)
