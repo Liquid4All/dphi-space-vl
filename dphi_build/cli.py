@@ -28,14 +28,6 @@ ORIN_L4T_PYTORCH_R36_4_0 = BuildTarget(
     base_version="l4t-pytorch-r36.4.0",
 )
 
-ORIN_LLAMA_CPP_R36_4_0 = BuildTarget(
-    name="orin",
-    base_image="dustynv/llama_cpp:0.3.7-r36.4.0",
-    cuda_arch="87",
-    base_version="llama-cpp-r36.4.0",
-)
-
-# GH200 target
 GH200_L4T_PYTORCH = BuildTarget(
     name="gh200",
     base_image="nvcr.io/nvidia/pytorch:25.05-py3",
@@ -43,7 +35,6 @@ GH200_L4T_PYTORCH = BuildTarget(
     base_version="l4t-pytorch-25.05",
 )
 
-# Model specifications
 MODEL_1P6B = ModelSpec(
     tag_prefix="liquidai/lfm2-vl-1p6b-gguf",
     hf_repo="LiquidAI/LFM2-VL-1.6B-GGUF",
@@ -110,17 +101,6 @@ def build_orin_l4t_pytorch_r36_4_0_3b() -> None:
     _docker_build(
         ORIN_L4T_PYTORCH_R36_4_0, MODEL_3B, dockerfile="l4t-pytorch.Dockerfile"
     )
-
-
-# ============================================================================
-# Orin builds using dusty-nv's llama_cpp container
-# ============================================================================
-def build_orin_llama_cpp_r36_4_0_1p6b() -> None:
-    _docker_build(ORIN_LLAMA_CPP_R36_4_0, MODEL_1P6B, dockerfile="llama-cpp.Dockerfile")
-
-
-def build_orin_llama_cpp_r36_4_0_3b() -> None:
-    _docker_build(ORIN_LLAMA_CPP_R36_4_0, MODEL_3B, dockerfile="llama-cpp.Dockerfile")
 
 
 # ============================================================================
