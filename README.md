@@ -16,8 +16,10 @@ This repo builds containerized Liquid visual models for DPhi Space.
 ### Build images
 
 ```bash
-bin/build-orin.sh
+bin/build-orin.sh [--quantization q8|q4]
 ```
+
+The `--quantization` option defaults to q8.
 
 ### Launch the server
 
