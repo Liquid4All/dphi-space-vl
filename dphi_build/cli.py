@@ -54,7 +54,9 @@ def _git_short_sha() -> str:
     return out.strip()
 
 
-def _docker_build(target: BuildTarget, model: ModelSpec, dockerfile: str = "Dockerfile") -> None:
+def _docker_build(
+    target: BuildTarget, model: ModelSpec, dockerfile: str = "Dockerfile"
+) -> None:
     sha = _git_short_sha()
     sha_tag = f"{model.tag_prefix}:{target.name}-{model.quantization}-{sha}"
     latest_tag = f"{model.tag_prefix}:{target.name}-{model.quantization}-latest"
@@ -89,15 +91,11 @@ def _docker_build(target: BuildTarget, model: ModelSpec, dockerfile: str = "Dock
 # Orin builds with l4t pytorch r36.4.0 base (for JetPack 6.2.1)
 # ============================================================================
 def build_orin_1p6b() -> None:
-    _docker_build(
-        ORIN_L4T_PYTORCH_R36_4_0, MODEL_1P6B
-    )
+    _docker_build(ORIN_L4T_PYTORCH_R36_4_0, MODEL_1P6B)
 
 
 def build_orin_3b() -> None:
-    _docker_build(
-        ORIN_L4T_PYTORCH_R36_4_0, MODEL_3B
-    )
+    _docker_build(ORIN_L4T_PYTORCH_R36_4_0, MODEL_3B)
 
 
 # ============================================================================
