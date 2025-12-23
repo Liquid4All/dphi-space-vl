@@ -8,7 +8,9 @@ This repo builds containerized Liquid visual models for DPhi Space.
 
 | Size | Quantization | Base | Image Tag |
 | --- | --- | --- | --- |
+| 3B | `Q8_0` | [`dustynv/l4t-ml:r36.4.0`](https://hub.docker.com/layers/dustynv/l4t-ml/r36.4.0) | `liquidai/lfm2-vl-3b-gguf:orin-q8-latest` |
 | 3B | `Q4_0` | [`dustynv/l4t-ml:r36.4.0`](https://hub.docker.com/layers/dustynv/l4t-ml/r36.4.0) | `liquidai/lfm2-vl-3b-gguf:orin-q4-latest` |
+| 1.6B | `Q8_0` | [`dustynv/l4t-ml:r36.4.0`](https://hub.docker.com/layers/dustynv/l4t-ml/r36.4.0) | `liquidai/lfm2-vl-1p6b-gguf:orin-q8-latest` |
 | 1.6B | `Q4_0` | [`dustynv/l4t-ml:r36.4.0`](https://hub.docker.com/layers/dustynv/l4t-ml/r36.4.0) | `liquidai/lfm2-vl-1p6b-gguf:orin-q4-latest` |
 
 ### Build images
@@ -22,9 +24,15 @@ bin/build-orin.sh
 ```bash
 # 3b
 docker run --runtime nvidia --rm --network host \
+  liquidai/lfm2-vl-3b-gguf:orin-q8-latest
+  
+  docker run --runtime nvidia --rm --network host \
   liquidai/lfm2-vl-3b-gguf:orin-q4-latest
 
 # 1.6b
+docker run --runtime nvidia --rm --network host \
+  liquidai/lfm2-vl-1p6b-gguf:orin-q8-latest
+  
 docker run --runtime nvidia --rm --network host \
   liquidai/lfm2-vl-1p6b-gguf:orin-q4-latest
 ```
@@ -104,12 +112,16 @@ Or build individual variants:
 
 ```bash
 # Orin builds
-uv run build-orin-1p6b
-uv run build-orin-3b
+uv run build-orin-1p6b-q8
+uv run build-orin-1p6b-q4
+uv run build-orin-3b-q8
+uv run build-orin-3b-q4
 
 # GH200 builds (for development testing)
-uv run build-gh200-1p6b
-uv run build-gh200-3b
+uv run build-gh200-1p6b-q8
+uv run build-gh200-1p6b-q4
+uv run build-gh200-3b-q8
+uv run build-gh200-3b-q4
 ```
 
 ### Test on GH200
@@ -118,9 +130,11 @@ uv run build-gh200-3b
 
 ```bash
 # Run 3B model
+bin/run-vl.sh liquidai/lfm2-vl-3b-gguf:gh200-q8-latest
 bin/run-vl.sh liquidai/lfm2-vl-3b-gguf:gh200-q4-latest
 
 # Run 1.6B model
+bin/run-vl.sh liquidai/lfm2-vl-1p6b-gguf:gh200-q8-latest
 bin/run-vl.sh liquidai/lfm2-vl-1p6b-gguf:gh200-q4-latest
 ```
 

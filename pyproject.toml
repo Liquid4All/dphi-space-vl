@@ -11,12 +11,16 @@ dev = [
 
 [project.scripts]
 # Orin builds (for JetPack 6.2.1)
-build-orin-1p6b = "dphi_build.cli:build_orin_1p6b"
-build-orin-3b = "dphi_build.cli:build_orin_3b"
+build-orin-1p6b-q8 = "dphi_build.cli:build_orin_1p6b_q8"
+build-orin-3b-q8 = "dphi_build.cli:build_orin_3b_q8"
+build-orin-1p6b-q4 = "dphi_build.cli:build_orin_1p6b_q4"
+build-orin-3b-q4 = "dphi_build.cli:build_orin_3b_q4"
 
 # GH200 builds
-build-gh200-1p6b = "dphi_build.cli:build_gh200_1p6b"
-build-gh200-3b = "dphi_build.cli:build_gh200_3b"
+build-gh200-1p6b-q8 = "dphi_build.cli:build_gh200_1p6b_q8"
+build-gh200-3b-q8 = "dphi_build.cli:build_gh200_3b_q8"
+build-gh200-1p6b-q4 = "dphi_build.cli:build_gh200_1p6b_q4"
+build-gh200-3b-q4 = "dphi_build.cli:build_gh200_3b_q4"
 
 [tool.setuptools]
 packages = ["dphi_build"]
