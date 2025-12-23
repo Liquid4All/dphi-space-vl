@@ -28,26 +28,26 @@ echo "Found llama-server at: $LLAMA_SERVER"
 MODEL_PATH="${MODEL_PATH:-/models/model.gguf}"
 MMPROJ_PATH="${MMPROJ_PATH:-/models/mmproj.gguf}"
 
-HOST="${LLAMA_HOST:-0.0.0.0}"
-PORT="${LLAMA_PORT:-8080}"
+HOST="${HOST:-0.0.0.0}"
+PORT="${PORT:-8080}"
 
 # Conservative defaults for Jetson demos; tune later
-CTX="${CTX_SIZE:-4096}"
+CTX_SIZE="${CTX_SIZE:-4096}"
 N_GPU_LAYERS="${N_GPU_LAYERS:-999}"
-PARALLEL="${N_PARALLEL:-1}"
-BATCH="${BATCH_SIZE:-512}"
-UBATCH="${UBATCH_SIZE:-128}"
+N_PARALLEL="${N_PARALLEL:-1}"
+BATCH_SIZE="${BATCH_SIZE:-512}"
+UBATCH_SIZE="${UBATCH_SIZE:-128}"
 
 echo "Configuration:"
 echo "  MODEL_PATH: ${MODEL_PATH}"
 echo "  MMPROJ_PATH: ${MMPROJ_PATH}"
 echo "  HOST: ${HOST}"
 echo "  PORT: ${PORT}"
-echo "  CTX_SIZE: ${CTX}"
+echo "  CTX_SIZE: ${CTX_SIZE}"
 echo "  N_GPU_LAYERS: ${N_GPU_LAYERS}"
-echo "  N_PARALLEL: ${PARALLEL}"
-echo "  BATCH_SIZE: ${BATCH}"
-echo "  UBATCH_SIZE: ${UBATCH}"
+echo "  N_PARALLEL: ${N_PARALLEL}"
+echo "  BATCH_SIZE: ${BATCH_SIZE}"
+echo "  UBATCH_SIZE: ${UBATCH_SIZE}"
 echo ""
 
 # Check if model files exist
@@ -74,8 +74,9 @@ exec "$LLAMA_SERVER" \
   --port "${PORT}" \
   -m "${MODEL_PATH}" \
   --mmproj "${MMPROJ_PATH}" \
-  -c "${CTX}" \
-  -b "${BATCH}" \
-  -ub "${UBATCH}" \
-  -np "${PARALLEL}" \
-  -ngl "${N_GPU_LAYERS}"
+  -c "${CTX_SIZE}" \
+  -b "${BATCH_SIZE}" \
+  -ub "${UBATCH_SIZE}" \
+  -np "${N_PARALLEL}" \
+  -ngl "${N_GPU_LAYERS}" \
+  --no-mmap
