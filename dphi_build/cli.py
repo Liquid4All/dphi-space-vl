@@ -37,7 +37,7 @@ MODEL_1P6B = ModelSpec(
     hf_repo="LiquidAI/LFM2-VL-1.6B-GGUF",
     text_file="LFM2-VL-1.6B-Q8_0.gguf",
     mmproj_file="mmproj-LFM2-VL-1.6B-Q8_0.gguf",
-    quantization="q4",
+    quantization="q8",
 )
 
 MODEL_3B = ModelSpec(
@@ -45,7 +45,7 @@ MODEL_3B = ModelSpec(
     hf_repo="LiquidAI/LFM2-VL-3B-GGUF",
     text_file="LFM2-VL-3B-Q8_0.gguf",
     mmproj_file="mmproj-LFM2-VL-3B-Q8_0.gguf",
-    quantization="q4",
+    quantization="q8",
 )
 
 
