@@ -68,6 +68,23 @@ These images should be optimized for:
 - **Jetson Orin 16GB**
 - **JetPack 6.2.1** (L4T 36.4.4, CUDA 12.6)
 
+### Performance and Resource Consumption
+
+| Model Size | Quantization | Model VRAM usage (GB) | Peak memory utilization (%) | Token per sec |
+| --- | --- | --- | --- | --- |
+| 3B   | `Q8_0` | 4.2 | 30% | 340 |
+| 3B   | `Q4_0` | 3.0 | 20% | 400 |
+| 1.6B | `Q8_0` | 2.8 | 25% | 610 |
+| 1.6B | `Q4_0` | 2.2 | 16% | 700 |
+
+All numbers are measured on GH200 with the following command:
+
+```bash
+nvidia-smi --query-gpu=timestamp,name,utilization.gpu,utilization.memory,memory.used,memory.total,temperature.gpu --format=csv -l 1
+```
+
+GPU utilization can reach 100% during inference.
+
 ## For Development
 
 <details>
