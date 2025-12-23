@@ -10,11 +10,11 @@ dev = [
 ]
 
 [project.scripts]
-# Orin r36.4.0 builds (for JetPack 6.2.1)
+# Orin l4t pytorch builds (for JetPack 6.2.1)
 build-orin-l4t-pytorch-1p6b = "dphi_build.cli:build_orin_l4t_pytorch_r36_4_0_1p6b"
 build-orin-l4t-pytorch-3b = "dphi_build.cli:build_orin_l4t_pytorch_r36_4_0_3b"
 
-# Orin dusty-nv llama_cpp builds
+# Orin llama_cpp builds
 build-orin-llama-cpp-1p6b = "dphi_build.cli:build_orin_llama_cpp_r36_4_0_1p6b"
 build-orin-llama-cpp-3b = "dphi_build.cli:build_orin_llama_cpp_r36_4_0_3b"
 

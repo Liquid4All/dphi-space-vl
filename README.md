@@ -89,17 +89,17 @@ To build all variants at once:
 Or build individual variants:
 
 ```bash
-# Orin r36.4.0 builds (Priority 1)
-uv run build-orin-r36.4.0-1p6b
-uv run build-orin-r36.4.0-3b
+# Orin l4t pytorch builds (Priority 1)
+uv run build-orin-l4t-pytorch-1p6b
+uv run build-orin-l4t-pytorch-3b
 
-# Orin dusty-nv builds (Priority 2)
-uv run build-orin-dustynv-1p6b
-uv run build-orin-dustynv-3b
+# Orin llama-cpp builds (Priority 2)
+uv run build-orin-llama-cpp-1p6b
+uv run build-orin-llama-cpp-3b
 
 # GH200 builds (for development testing)
-uv run build-gh200-1p6b
-uv run build-gh200-3b
+uv run build-gh200-l4t-pytorch-1p6b
+uv run build-gh200-l4t-pytorch-3b
 ```
 
 ### Test on GH200
@@ -108,10 +108,10 @@ uv run build-gh200-3b
 
 ```bash
 # Run 3B model
-bin/run-vl.sh liquidai/lfm2-vl-3b-gguf:gh200-q4-25.05-latest
+bin/run-vl.sh liquidai/lfm2-vl-3b-gguf:gh200-q4-l4t-pytorch-25.05-latest
 
 # Run 1.6B model
-bin/run-vl.sh liquidai/lfm2-vl-1p6b-gguf:gh200-q4-25.05-latest
+bin/run-vl.sh liquidai/lfm2-vl-1p6b-gguf:gh200-q4-l4t-pytorch-25.05-latest
 ```
 
 > [!NOTE]
