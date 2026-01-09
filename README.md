@@ -135,12 +135,13 @@ bin/run-vl.sh liquidai/lfm2-vl-1p6b-gguf:gh200-q4-latest
 ```
 
 > [!NOTE]
-> Running the Orin images will result in the following error on GH200:
+> Running the Orin images will result in the following error on GH200.
+>
+> ```
+> /usr/local/bin/llama-server: error while loading shared libraries: libnvrm_gpu.so: cannot open shared object file: No such file or directory`
+> ```
+>
 > This is expected because `libnvrm_gpu.so` is only available on Jetson devices.
-
-```
-/usr/local/bin/llama-server: error while loading shared libraries: libnvrm_gpu.so: cannot open shared object file: No such file or directory
-```
 
 **Run inference**
 
