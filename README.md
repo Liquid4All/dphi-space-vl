@@ -8,10 +8,10 @@ This repo builds containerized Liquid visual models for DPhi Space.
 
 | Size | Quantization | Base | Image Tag |
 | --- | --- | --- | --- |
-| 3B | `Q8_0` | [`dustynv/l4t-ml:r36.4.0`](https://hub.docker.com/layers/dustynv/l4t-ml/r36.4.0) | `liquidai/lfm2-vl-3b-gguf:orin-q8-latest` |
-| 3B | `Q4_0` | [`dustynv/l4t-ml:r36.4.0`](https://hub.docker.com/layers/dustynv/l4t-ml/r36.4.0) | `liquidai/lfm2-vl-3b-gguf:orin-q4-latest` |
-| 1.6B | `Q8_0` | [`dustynv/l4t-ml:r36.4.0`](https://hub.docker.com/layers/dustynv/l4t-ml/r36.4.0) | `liquidai/lfm2-vl-1p6b-gguf:orin-q8-latest` |
-| 1.6B | `Q4_0` | [`dustynv/l4t-ml:r36.4.0`](https://hub.docker.com/layers/dustynv/l4t-ml/r36.4.0) | `liquidai/lfm2-vl-1p6b-gguf:orin-q4-latest` |
+| 3B | `Q8_0` | [`dustynv/l4t-pytorch:r36.4.0`](https://hub.docker.com/layers/dustynv/l4t-pytorch/r36.4.0) | `liquidai/lfm2-vl-3b-gguf:orin-q8-latest` |
+| 3B | `Q4_0` | [`dustynv/l4t-pytorch:r36.4.0`](https://hub.docker.com/layers/dustynv/l4t-pytorch/r36.4.0) | `liquidai/lfm2-vl-3b-gguf:orin-q4-latest` |
+| 1.6B | `Q8_0` | [`dustynv/l4t-pytorch:r36.4.0`](https://hub.docker.com/layers/dustynv/l4t-pytorch/r36.4.0) | `liquidai/lfm2-vl-1p6b-gguf:orin-q8-latest` |
+| 1.6B | `Q4_0` | [`dustynv/l4t-pytorch:r36.4.0`](https://hub.docker.com/layers/dustynv/l4t-pytorch/r36.4.0) | `liquidai/lfm2-vl-1p6b-gguf:orin-q4-latest` |
 
 ### Build images
 
@@ -19,7 +19,7 @@ This repo builds containerized Liquid visual models for DPhi Space.
 bin/build-orin.sh [--quantization q8|q4]
 ```
 
-The `--quantization` option defaults to q8.
+The `--quantization` option defaults to q4.
 
 ### Launch the server
 

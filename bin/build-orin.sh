@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-QUANTIZATION="q8"
+QUANTIZATION="q4"
 
 # Read --quantization argument if provided
 while [[ $# -gt 0 ]]; do
