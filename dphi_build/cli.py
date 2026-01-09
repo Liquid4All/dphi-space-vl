@@ -22,7 +22,7 @@ class ModelSpec:
 
 ORIN_BUILD_TARGET = BuildTarget(
     name="orin",
-    base_image="dustynv/l4t-ml:r36.4.0",
+    base_image="dustynv/l4t-pytorch:r36.4.0",
     cuda_arch="87",
 )
 
