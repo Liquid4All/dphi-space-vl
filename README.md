@@ -2,39 +2,37 @@
 
 This repo builds containerized Liquid visual models for DPhi Space.
 
+> [!NOTE]
+> This repo includes options to build both `Q4_0` and `Q8_0` quantized versions of the Liquid VL models for Jetson Orin devices. However, only the `Q4_0` versions have been confirmed to work. The `Q8_0` versions were coupled with a larger base image `l4t-ml`, and were never tested.
+
 ## For DPhi Space
 
 ### Available Images
 
 | Size | Quantization | Base | Image Tag |
 | --- | --- | --- | --- |
-| 3B | `Q8_0` | [`dustynv/l4t-pytorch:r36.4.0`](https://hub.docker.com/layers/dustynv/l4t-pytorch/r36.4.0) | `liquidai/lfm2-vl-3b-gguf:orin-q8-latest` |
-| 3B | `Q4_0` | [`dustynv/l4t-pytorch:r36.4.0`](https://hub.docker.com/layers/dustynv/l4t-pytorch/r36.4.0) | `liquidai/lfm2-vl-3b-gguf:orin-q4-latest` |
-| 1.6B | `Q8_0` | [`dustynv/l4t-pytorch:r36.4.0`](https://hub.docker.com/layers/dustynv/l4t-pytorch/r36.4.0) | `liquidai/lfm2-vl-1p6b-gguf:orin-q8-latest` |
 | 1.6B | `Q4_0` | [`dustynv/l4t-pytorch:r36.4.0`](https://hub.docker.com/layers/dustynv/l4t-pytorch/r36.4.0) | `liquidai/lfm2-vl-1p6b-gguf:orin-q4-latest` |
+| 3B | `Q4_0` | [`dustynv/l4t-pytorch:r36.4.0`](https://hub.docker.com/layers/dustynv/l4t-pytorch/r36.4.0) | `liquidai/lfm2-vl-3b-gguf:orin-q4-latest` |
 
 ### Build images
 
 ```bash
-bin/build-orin.sh [--quantization q8|q4]
+bin/build-orin.sh [--quantization q4|q8]
 ```
 
 The `--quantization` option defaults to q4.
+
+> [!NOTE]
+> The images need to be built natively on a Jetson Orin device.
 
 ### Launch the server
 
 ```bash
 # 3b
 docker run --runtime nvidia --rm --network host \
-  liquidai/lfm2-vl-3b-gguf:orin-q8-latest
-  
-  docker run --runtime nvidia --rm --network host \
   liquidai/lfm2-vl-3b-gguf:orin-q4-latest
 
 # 1.6b
-docker run --runtime nvidia --rm --network host \
-  liquidai/lfm2-vl-1p6b-gguf:orin-q8-latest
-  
 docker run --runtime nvidia --rm --network host \
   liquidai/lfm2-vl-1p6b-gguf:orin-q4-latest
 ```
@@ -82,10 +80,10 @@ These images should be optimized for:
 
 | Model Size | Quantization | Model VRAM usage (GB) | Peak memory utilization (%) | Token per sec |
 | --- | --- | --- | --- | --- |
-| 3B   | `Q8_0` | 4.2 | 30% | 340 |
-| 3B   | `Q4_0` | 3.0 | 20% | 400 |
-| 1.6B | `Q8_0` | 2.8 | 25% | 610 |
 | 1.6B | `Q4_0` | 2.2 | 16% | 700 |
+| 3B   | `Q4_0` | 3.0 | 20% | 400 |
+| 3B   | `Q8_0` | 4.2 | 30% | 340 |
+| 1.6B | `Q8_0` | 2.8 | 25% | 610 |
 
 All numbers are measured on GH200 with the following command:
 
