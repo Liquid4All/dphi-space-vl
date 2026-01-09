@@ -184,7 +184,7 @@ docker push liquidai/lfm2-vl-3b-gguf:gh200-q4-<commit-hash>
 | Configuration | `l4t-ml:r36.4.0` + Q8 |
 | Error | `failed to unpack loaded image: failed to extract layer sha256:...` |
 | Root Cause | Docker image exceeds EM system's btrfs overlay capacity |
-| Resolution | Works on devkit (overlay2), fails on EM (btrfs) |
+| Key Finding | Works on devkit (overlay2), fails on EM (btrfs) |
 
 </details>
 
