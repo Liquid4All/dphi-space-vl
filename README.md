@@ -13,7 +13,10 @@ This repo builds containerized Liquid visual models for DPhi Space.
 bin/build-orin.sh
 ```
 
-The `--quantization` option defaults to q4.
+This command builds two images:
+
+- `liquidai/lfm2-vl-3b-gguf:orin-q4-latest`
+- `liquidai/lfm2-vl-1p6b-gguf:orin-q4-latest`
 
 > [!NOTE]
 > The images need to be built natively on a Jetson Orin device.
@@ -132,6 +135,7 @@ bin/run-vl.sh liquidai/lfm2-vl-1p6b-gguf:gh200-q4-latest
 ```
 
 > [!NOTE]
+>
 > Running the Orin images will result in the following error on GH200:
 > ```
 > /usr/local/bin/llama-server: error while loading shared libraries: libnvrm_gpu.so: cannot open shared object file: No such file or directory
