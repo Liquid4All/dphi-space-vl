@@ -7,17 +7,10 @@ This repo builds containerized Liquid visual models for DPhi Space.
 
 ## For DPhi Space
 
-### Available Images
-
-| Size | Quantization | Base | Image Tag |
-| --- | --- | --- | --- |
-| 1.6B | `Q4_0` | [`dustynv/l4t-pytorch:r36.4.0`](https://hub.docker.com/layers/dustynv/l4t-pytorch/r36.4.0) | `liquidai/lfm2-vl-1p6b-gguf:orin-q4-latest` |
-| 3B | `Q4_0` | [`dustynv/l4t-pytorch:r36.4.0`](https://hub.docker.com/layers/dustynv/l4t-pytorch/r36.4.0) | `liquidai/lfm2-vl-3b-gguf:orin-q4-latest` |
-
 ### Build images
 
 ```bash
-bin/build-orin.sh [--quantization q4|q8]
+bin/build-orin.sh
 ```
 
 The `--quantization` option defaults to q4.
@@ -153,7 +146,9 @@ bin/test-vl.sh
 
 ### Publish to Docker Hub
 
-**Push Orin images for DPhi Space testing:**
+Pushing the image to Docker Hub is unnecessary, since the image must be built natively on Jetson Orin devices.
+
+**Push Orin images:**
 
 ```bash
 docker push liquidai/lfm2-vl-1p6b-gguf:orin-q4-latest
@@ -162,7 +157,7 @@ docker push liquidai/lfm2-vl-3b-gguf:orin-q4-latest
 docker push liquidai/lfm2-vl-3b-gguf:orin-q4-<commit-hash>
 ```
 
-**Push GH200 images for development:**
+**Push GH200 images:**
 
 ```bash
 docker push liquidai/lfm2-vl-1p6b-gguf:gh200-q4-latest
@@ -170,6 +165,26 @@ docker push liquidai/lfm2-vl-1p6b-gguf:gh200-q4-<commit-hash>
 docker push liquidai/lfm2-vl-3b-gguf:gh200-q4-latest
 docker push liquidai/lfm2-vl-3b-gguf:gh200-q4-<commit-hash>
 ```
+
+### Known issues and resolutions
+
+#### Cross-compilation issue
+
+| Category | Description |
+| --- | --- |
+| Configuration | `l4t-pytorch:r36.4.0` + Q4, built on GH200 |
+| Error | `double free or corruption (out)` |
+| Root Cause | Architecture mismatch (GH200 armv9 → Orin armv8) |
+| Resolution | Build locally on Jetson Orin with matching architecture |
+
+#### Image size overflow with `l4t-ml`
+
+| Category | Description |
+| --- | --- |
+| Configuration | `l4t-ml:r36.4.0` + Q8 |
+| Error | `failed to unpack loaded image: failed to extract layer sha256:...` |
+| Root Cause | Docker image exceeds EM system's btrfs overlay capacity |
+| Resolution | Works on devkit (overlay2), fails on EM (btrfs) |
 
 </details>
 
